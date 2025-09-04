@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Soumission d’assurance – Auto / Habitation</title>
+  <meta name="description" content="Formulaire de soumission pour assurances auto et habitation au Québec.">
+  <style>
+    :root{ --bg:#0f172a; --card:#111827; --muted:#6b7280; --accent:#2563eb; --accent-2:#1d4ed8; --text:#f3f4f6; --text-2:#e5e7eb; --border:#1f2937; }
+    *{box-sizing:border-box}
+    body{ margin:0; background:linear-gradient(180deg,#0b1224, #0f172a); color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; line-height:1.45; }
+    header{ padding:32px 20px 16px; text-align:center; }
+    header h1{ margin:0 0 8px; font-size: clamp(22px,3.3vw,34px); letter-spacing:.3px; }
+    header p{ margin:0; color:var(--muted) }
+    .wrap{ max-width: 980px; margin: 20px auto 64px; padding: 0 16px; }
+    .card{ background: linear-gradient(180deg,#0e1629, #0c1323); border:1px solid var(--border); border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.35); overflow:hidden; }
+    .card header{ text-align:left; padding:20px; border-bottom:1px solid var(--border); }
+    .pill{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; font-size:13px; background:#0b1120; border:1px solid var(--border); color:var(--text-2); }
+    form{ padding:20px }
+    fieldset{ border:1px solid var(--border); padding:16px; border-radius:12px; margin:0 0 18px; }
+    legend{ padding:0 8px; color:var(--text-2); font-weight:600; letter-spacing:.2px; }
+    .row{ display:grid; grid-template-columns: repeat(12,1fr); gap:12px; margin-bottom:12px; }
+    .col-12{grid-column: span 12} .col-6{grid-column: span 12} .col-4{grid-column: span 12} .col-3{grid-column: span 12} .col-2{grid-column: span 12} .col-7{grid-column: span 12}
+    @media(min-width:700px){ .col-6{grid-column: span 6} .col-4{grid-column: span 4} .col-3{grid-column: span 3} .col-2{grid-column: span 2} .col-7{grid-column: span 7} }
+    label{ display:block; font-size:14px; color:var(--text-2); margin:2px 0 6px; }
+    .inline-help{ font-size:12px; color:var(--muted); margin-top:2px }
+    input[type="text"],input[type="email"],input[type="tel"],input[type="date"],input[type="number"],select,textarea{ width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background:#0b1120; color:var(--text); outline:none; }
+    textarea{ min-height:100px; resize:vertical }
+    .help{ font-size:12px; color:var(--muted); margin-top:6px}
+    .checks{ display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:8px 14px }
+    .checks label{ display:flex; gap:8px; align-items:center; margin:0 }
+    .two-col{ display:flex; gap:30px; flex-wrap:wrap }
+    .two-col>div{ flex:1 1 280px }
+    .veh-card{ border:1px dashed var(--border); border-radius:12px; padding:12px; margin-top:10px; background:rgba(255,255,255,.02) }
+    .veh-head{ display:flex; justify-content:space-between; margin-bottom:8px; color:var(--text-2); font-weight:600 }
+    .veh-actions button{ background:#0b1120; color:var(--text-2); border:1px solid var(--border); padding:6px 8px; border-radius:10px; cursor:pointer }
+    .actions{ display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; margin-top:8px }
+    button{ border:0; cursor:pointer; padding:12px 16px; border-radius:12px; font-weight:600; background:linear-gradient(180deg,var(--accent), var(--accent-2)); color:#fff; letter-spacing:.2px }
+    button.secondary{ background:#0b1120; color:var(--text-2); border:1px solid var(--border) }
+    .consent{ display:flex; gap:10px; align-items:flex-start; margin-top:8px }
+    .radios{ display:flex; gap:16px; flex-wrap:wrap }
+    .days{ display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap:8px 14px }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Soumission d’assurance – Auto • Habitation</h1>
+    <p>Courtier en assurance de dommages – Québec</p>
+  </header>
+
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <span class="pill">🚗 Auto</span>
+        <span class="pill">🏠 Habitation</span>
+      </header>
+
+      <form id="soumission" action="https://formspree.io/f/xrblvlnw" method="post" novalidate>
+        <input type="hidden" name="_subject" value="Nouvelle soumission d’assurance">
+        <input type="hidden" name="_next" value="https://merlinthenub-cyber.github.io/soumission-auto/merci.html">
+
+        <!-- INFORMATIONS PERSONNELLES -->
+        <fieldset>
+          <legend>Informations personnelles</legend>
+          <div class="row">
+            <div class="col-6">
+              <label for="prenom">Prénom *</label>
+              <input id="prenom" name="prenom" type="text" autocomplete="given-name" required>
+              <div class="inline-help">Selon votre permis de conduire</div>
+            </div>
+            <div class="col-6">
+              <label for="nom">Nom de famille *</label>
+              <input id="nom" name="nom" type="text" autocomplete="family-name" required>
+              <div class="inline-help">Selon votre permis de conduire</div>
+            </div>
+            <div class="col-6">
+              <label for="date_naissance">Date de naissance *</label>
+              <input id="date_naissance" name="date_naissance" type="date" required>
+            </div>
+            <div class="col-6">
+              <label for="email">Courriel *</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="col-6">
+              <label for="tel">Téléphone *</label>
+              <input id="tel" name="tel" type="tel" autocomplete="tel" placeholder="Ex. 514-555-1234" required>
+            </div>
+
+            <div class="col-6">
+              <label for="genre">Identité de genre</label>
+              <select id="genre" name="genre">
+                <option value="">— Sélectionner —</option>
+                <option value="homme">Homme</option>
+                <option value="femme">Femme</option>
+                <option value="x">X</option>
+              </select>
+              <div class="inline-help">Selon votre permis de conduire</div>
+            </div>
+
+            <div class="col-6">
+              <label for="assureur_actuel">Nom de l’assureur actuel</label>
+              <input id="assureur_actuel" name="assureur_actuel" type="text" placeholder="Ex. Intact, Desjardins, Beneva">
+            </div>
+
+            <div class="col-6">
+              <label for="experience_totale">Nombre d’années d’expérience d’assurances (total)</label>
+              <select id="experience_totale" name="experience_totale">
+                <option value="">Sélectionnez…</option>
+                <option>Pas assuré présentement</option>
+                <option>Moins d'un an</option>
+                <option>1 an, mais moins de 2</option>
+                <option>2 ans, mais moins de 3</option>
+                <option>3 ans, mais moins de 4</option>
+                <option>4 ans, mais moins de 5</option>
+                <option>5 ans, mais moins de 6</option>
+                <option>6 ans et plus</option>
+              </select>
+            </div>
+
+            <div class="col-12">
+              <label for="adresse">Adresse complète</label>
+              <input id="adresse" name="adresse" type="text" autocomplete="street-address" placeholder="Numéro, rue, ville, code postal">
+            </div>
+
+            <div class="col-6">
+              <label for="duree_adresse">Nombre d’années à cette adresse</label>
+              <select id="duree_adresse" name="duree_adresse">
+                <option value="">Sélectionnez…</option>
+                <option>Moins de 6 mois</option>
+                <option>Entre 6 mois et un an</option>
+                <option>Entre un et deux ans</option>
+                <option>Entre deux et trois ans</option>
+                <option>Trois ans et plus</option>
+              </select>
+            </div>
+
+            <div class="col-6">
+              <label for="statut_residence">Statut de résidence</label>
+              <select id="statut_residence" name="statut_residence">
+                <option value="">— Sélectionner —</option>
+                <option value="proprietaire">Propriétaire</option>
+                <option value="locataire">Locataire</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="help">* Champs obligatoires</div>
+        </fieldset>
+
+        <!-- VÉHICULE -->
+        <fieldset>
+          <legend>Véhicule (si soumission auto)</legend>
+          <div class="row">
+            <div class="col-12">
+              <label><input id="multi_veh" type="checkbox"> J'ai plus d'un véhicule</label>
+              <div class="help">Cochez pour ajouter d'autres véhicules (jusqu'à 4 au total).</div>
+            </div>
+          </div>
+          <div id="vehiculesContainer">
+            <div class="veh-card" data-index="0">
+              <div class="veh-head">
+                <span>Véhicule #1</span>
+                <div class="veh-actions" style="display:none">
+                  <button type="button" class="remove-veh">Retirer</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-2">
+                  <label for="veh_0_annee">Année</label>
+                  <input id="veh_0_annee" name="vehicules[0][annee]" type="number" min="1980" max="2030" step="1" placeholder="2025">
+                </div>
+                <div class="col-3">
+                  <label for="veh_0_marque">Marque</label>
+                  <input id="veh_0_marque" name="vehicules[0][marque]" type="text" placeholder="Toyota">
+                </div>
+                <div class="col-7">
+                  <label for="veh_0_modele">Modèle</label>
+                  <input id="veh_0_modele" name="vehicules[0][modele]" type="text" placeholder="Corolla">
+                </div>
+                <div class="col-12">
+                  <label for="veh_0_vin">NIV (VIN)</label>
+                  <input id="veh_0_vin" name="vehicules[0][vin]" type="text" placeholder="17 caractères">
+                </div>
+
+                <div class="col-6">
+                  <label>État du véhicule lors de l’achat</label>
+                  <div class="radios">
+                    <label><input type="radio" name="vehicules[0][etat_achat]" value="neuf"> Neuf</label>
+                    <label><input type="radio" name="vehicules[0][etat_achat]" value="demo"> Démonstration</label>
+                    <label><input type="radio" name="vehicules[0][etat_achat]" value="occasion"> Usagée</label>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <label>Propriétaire ou locataire ?</label>
+                  <div class="radios">
+                    <label><input type="radio" name="vehicules[0][statut_vehicule]" value="proprietaire"> Propriétaire</label>
+                    <label><input type="radio" name="vehicules[0][statut_vehicule]" value="proprietaire_financement"> Propriétaire (avec financement)</label>
+                    <label><input type="radio" name="vehicules[0][statut_vehicule]" value="locataire"> Locataire</label>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <label for="veh_0_distance_aller">Distance vers travail/école (trajet aller, km)</label>
+                  <input id="veh_0_distance_aller" name="vehicules[0][distance_aller_km]" type="number" min="0" step="0.1" placeholder="Ex. 12">
+                  <div class="inline-help">Entrez <strong>0</strong> si vous n'utilisez votre véhicule que pour les loisirs.</div>
+                </div>
+
+                <div class="col-6">
+                  <label>Condition de l’auto au moment de l’acquisition</label>
+                  <div class="radios">
+                    <label><input type="radio" name="vehicules[0][condition]" value="neuve"> Neuve</label>
+                    <label><input type="radio" name="vehicules[0][condition]" value="usagee"> Usagée</label>
+                    <label><input type="radio" name="vehicules[0][condition]" value="demo"> Démo</label>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="actions" id="veh_actions" style="display:none; justify-content:flex-start;">
+            <button type="button" class="secondary" id="addVeh">Ajouter un véhicule</button>
+          </div>
+
+          <template id="veh_template">
+            <div class="veh-card" data-index="{i}">
+              <div class="veh-head">
+                <span>Véhicule #{n}</span>
+                <div class="veh-actions">
+                  <button type="button" class="remove-veh">Retirer</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-2">
+                  <label for="veh_{i}_annee">Année</label>
+                  <input id="veh_{i}_annee" name="vehicules[{i}][annee]" type="number" min="1980" max="2030" step="1" placeholder="2025">
+                </div>
+                <div class="col-3">
+                  <label for="veh_{i}_marque">Marque</label>
+                  <input id="veh_{i}_marque" name="vehicules[{i}][marque]" type="text" placeholder="Toyota">
+                </div>
+                <div class="col-7">
+                  <label for="veh_{i}_modele">Modèle</label>
+                  <input id="veh_{i}_modele" name="vehicules[{i}][modele]" type="text" placeholder="Corolla">
+                </div>
+                <div class="col-12">
+                  <label for="veh_{i}_vin">NIV (VIN)</label>
+                  <input id="veh_{i}_vin" name="vehicules[{i}][vin]" type="text" placeholder="17 caractères">
+                </div>
+
+                <div class="col-6">
+                  <label>État du véhicule lors de l’achat</label>
+                  <div class="radios">
+                    <label><input type="radio" name="vehicules[{i}][etat_achat]" value="neuf"> Neuf</label>
+                    <label><input type="radio" name="vehicules[{i}][etat_achat]" value="demo"> Démonstration</label>
+                    <label><input type="radio" name="vehicules[{i}][etat_achat]" value="occasion"> Usagée</label>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <label>Propriétaire ou locataire ?</label>
+                  <div class="radios">
+                    <label><input type="radio" name="vehicules[{i}][statut_vehicule]" value="proprietaire"> Propriétaire</label>
+                    <label><input type="radio" name="vehicules[{i}][statut_vehicule]" value="proprietaire_financement"> Propriétaire (avec financement)</label>
+                    <label><input type="radio" name="vehicules[{i}][statut_vehicule]" value="locataire"> Locataire</label>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <label for="veh_{i}_distance_aller">Distance vers travail/école (trajet aller, km)</label>
+                  <input id="veh_{i}_distance_aller" name="vehicules[{i}][distance_aller_km]" type="number" min="0" step="0.1" placeholder="Ex. 12">
+                  <div class="inline-help">Entrez <strong>0</strong> si vous n'utilisez votre véhicule que pour les loisirs.</div>
+                </div>
+
+                <div class="col-6">
+                  <label>Condition de l’auto au moment de l’acquisition</label>
+                  <div class="radios">
+                    <label><input type="radio" name="vehicules[{i}][condition]" value="neuve"> Neuve</label>
+                    <label><input type="radio" name="vehicules[{i}][condition]" value="usagee"> Usagée</label>
+                    <label><input type="radio" name="vehicules[{i}][condition]" value="demo"> Démo</label>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </template>
+        </fieldset>
+
+        <!-- QUESTIONS D’ADMISSIBILITÉ (now BEFORE coverage) -->
+        <fieldset>
+          <legend>Questions d’admissibilité</legend>
+
+          <label>1. Un assureur a-t-il résilié ou refusé votre assurance auto dans les 5 dernières années ?</label>
+          <div class="radios">
+            <label><input type="radio" name="admissibilite_resiliation" value="oui" required> Oui</label>
+            <label><input type="radio" name="admissibilite_resiliation" value="non"> Non</label>
+          </div>
+
+          <label>2. Un permis de conduire a-t-il déjà été suspendu ou révoqué dans votre ménage ou vous-même ?</label>
+          <div class="radios">
+            <label><input type="radio" name="admissibilite_permis" value="oui" required> Oui</label>
+            <label><input type="radio" name="admissibilite_permis" value="non"> Non</label>
+          </div>
+
+          <label>3. Quelqu’un de votre ménage ou vous-même a-t-il déjà eu des poursuites ou été accusé au civil ou criminel ?</label>
+          <div class="radios">
+            <label><input type="radio" name="admissibilite_judiciaire" value="oui" required> Oui</label>
+            <label><input type="radio" name="admissibilite_judiciaire" value="non"> Non</label>
+          </div>
+        </fieldset>
+
+        <!-- COUVERTURE SOUHAITÉE -->
+        <fieldset>
+          <legend>Couverture souhaitée</legend>
+          <div class="checks">
+            <label><input id="cov_resp_uni" type="checkbox" name="couverture[]" value="responsabilite_uniquement"> Responsabilité civile uniquement</label>
+            <label><input id="cov_collision" type="checkbox" name="couverture[]" value="collision"> Collision</label>
+            <label><input id="cov_trsc" type="checkbox" name="couverture[]" value="tous_risques_sauf_collision"> Tous risques sauf collision</label>
+            <label><input id="cov_tr" type="checkbox" name="couverture[]" value="tous_risques"> Tous risques</label>
+          </div>
+          <div class="help">« Tous risques » inclut une garantie complète : <strong>collision, feu, vol et vandalisme</strong>. « Tous risques sauf collision » couvre uniquement le <strong>feu, vol et vandalisme</strong>.</div>
+        </fieldset>
+
+        <!-- RESPONSABILITÉ CIVILE (immediately AFTER coverage) -->
+        <fieldset>
+          <legend>Responsabilité civile</legend>
+          <div class="row">
+            <div class="col-6">
+              <label for="responsabilite_civile">Montant de couverture *</label>
+              <select id="responsabilite_civile" name="responsabilite_civile" required>
+                <option value="">— Sélectionner —</option>
+                <option value="1M">1 000 000 $</option>
+                <option value="2M">2 000 000 $</option>
+              </select>
+            </div>
+          </div>
+          <div class="help">Choisissez entre <strong>1M $</strong> ou <strong>2M $</strong> de responsabilité civile.</div>
+        </fieldset>
+
+        <!-- FRANCHISES -->
+        <fieldset>
+          <legend>Franchises</legend>
+          <div class="two-col">
+            <div>
+              <label for="franchise_collision">Franchise – Collision</label>
+              <select id="franchise_collision" name="franchise_collision" disabled>
+                <option value="">— Sélectionner —</option>
+                <option value="0">$0</option>
+<option value="250">$250</option>
+<option value="500">$500</option>
+<option value="750">$750</option>
+<option value="1000">$1000</option>
+<option value="1250">$1250</option>
+<option value="1500">$1500</option>
+<option value="1750">$1750</option>
+<option value="2000">$2000</option>
+              </select>
+            </div>
+            <div>
+              <label for="franchise_trsc">Franchise – Tous risques sauf collision</label>
+              <select id="franchise_trsc" name="franchise_trsc" disabled>
+                <option value="">— Sélectionner —</option>
+                <option value="0">$0</option>
+<option value="250">$250</option>
+<option value="500">$500</option>
+<option value="750">$750</option>
+<option value="1000">$1000</option>
+<option value="1250">$1250</option>
+<option value="1500">$1500</option>
+<option value="1750">$1750</option>
+<option value="2000">$2000</option>
+              </select>
+            </div>
+          </div>
+          <div class="help">Choisissez une franchise de <strong>0 $ à 2 000 $</strong> par paliers de <strong>250 $</strong>.</div>
+        </fieldset>
+
+        <!-- ÉCHÉANCE -->
+        <fieldset>
+          <legend>Renouvellement</legend>
+          <div class="row">
+            <div class="col-12">
+              <label for="date_echeance"><strong>Quelle est la date d’échéance de ton contrat d’assurance actuel ? *</strong></label>
+              <input id="date_echeance" name="date_echeance" type="date" required>
+              <div class="help">Exemple : si ton renouvellement est le 31 mars 2026, indique cette date. Nous te contacterons durant <span id="moisEcheance">le mois du renouvellement</span>.</div>
+            </div>
+            <div class="col-6">
+              <label for="produit">Produit concerné *</label>
+              <select id="produit" name="produit" required>
+                <option value="">— Sélectionner —</option>
+                <option value="auto">Auto</option>
+                <option value="habitation">Habitation</option>
+                <option value="auto_habitation">Auto & Habitation</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- PRIME ACTUELLE ET COMMENTAIRES -->
+        <fieldset>
+          <legend>Prime actuelle et commentaires</legend>
+          <textarea id="commentaires" name="commentaires" placeholder="Exemple : Prime à battre 1 200$/année ou 110$/mois"></textarea>
+        </fieldset>
+
+        <!-- DISPONIBILITÉS POUR RETOUR D'APPEL (now AFTER prime) -->
+        <fieldset>
+          <legend>Disponibilités pour un retour d'appel</legend>
+          <div class="help">Choisissez vos journées et les moments qui vous conviennent pour qu’on vous rappelle.</div>
+          <div class="row">
+            <div class="col-12">
+              <label>Journées disponibles (lundi à samedi)</label>
+              <div class="days">
+                <label><input type="checkbox" name="disponibilites[jours][]" value="lundi"> Lundi</label>
+                <label><input type="checkbox" name="disponibilites[jours][]" value="mardi"> Mardi</label>
+                <label><input type="checkbox" name="disponibilites[jours][]" value="mercredi"> Mercredi</label>
+                <label><input type="checkbox" name="disponibilites[jours][]" value="jeudi"> Jeudi</label>
+                <label><input type="checkbox" name="disponibilites[jours][]" value="vendredi"> Vendredi</label>
+                <label><input type="checkbox" name="disponibilites[jours][]" value="samedi"> Samedi</label>
+              </div>
+            </div>
+            <div class="col-12" style="margin-top:10px">
+              <label>Moments de la journée</label>
+              <div class="radios">
+                <label><input type="radio" name="disponibilites[plage]" value="toute_la_journee"> Toute la journée</label>
+                <label><input type="radio" name="disponibilites[plage]" value="avant_midi"> Avant midi (08h–12h)</label>
+                <label><input type="radio" name="disponibilites[plage]" value="apres_midi"> Après‑midi (12h–17h)</label>
+                <label><input type="radio" name="disponibilites[plage]" value="soir"> En soirée (17h–20h)</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- CONSENTEMENTS (3 OBLIGATOIRES) -->
+        <fieldset>
+          <legend>Consentements</legend>
+
+          <label class="consent">
+            <input type="checkbox" id="consent_contact" name="consent_contact" required>
+            <span>Je consens à être contacté pour une soumission d’assurance.</span>
+          </label>
+
+          <label class="consent">
+            <input type="checkbox" id="consent_permis" name="consent_permis" required>
+            <span>Je consens à fournir mon numéro de permis de conduire pour permettre la consultation de l’historique de réclamations.</span>
+          </label>
+
+          <label class="consent">
+            <input type="checkbox" id="consent_credit_allstate" name="consent_credit_allstate" required>
+            <span>J’autorise Allstate du Canada à effectuer une vérification rapide de mon dossier de crédit afin d’établir la meilleure prime possible.</span>
+          </label>
+
+          <div class="help">Les trois consentements sont requis pour soumettre le formulaire.</div>
+        </fieldset>
+
+        <div class="actions">
+          <button type="reset" class="secondary">Effacer</button>
+          <button type="submit">Envoyer la demande</button>
+        </div>
+        <div class="footer-note">Aucune information sur le permis de conduire n’est demandée tant que vous ne consentez pas à la consultation de l’historique.</div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Affichage du mois d'échéance
+    const dateInput = document.getElementById('date_echeance');
+    const moisSpan = document.getElementById('moisEcheance');
+    const mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+    function updateMois(){
+      if(!dateInput || !moisSpan) return;
+      if(!dateInput.value){ moisSpan.textContent = "le mois du renouvellement"; return; }
+      const d = new Date(dateInput.value + "T12:00:00");
+      if(isNaN(d)) { moisSpan.textContent = "le mois du renouvellement"; return; }
+      moisSpan.textContent = mois[d.getMonth()] + " " + d.getFullYear();
+    }
+    if(document.getElementById('date_echeance')){ document.getElementById('date_echeance').addEventListener('change', updateMois); updateMois(); }
+
+    // Multi-véhicules
+    const multiVeh = document.getElementById('multi_veh');
+    const vehContainer = document.getElementById('vehiculesContainer');
+    const vehActions = document.getElementById('veh_actions');
+    const templ = document.getElementById('veh_template')?.innerHTML || "";
+    function currentVehCount(){ return vehContainer.querySelectorAll('.veh-card').length; }
+    function refreshVehHeaders(){
+      vehContainer.querySelectorAll('.veh-card').forEach((card, idx)=>{ card.querySelector('.veh-head span').textContent = "Véhicule #"+(idx+1); });
+    }
+    function enableMultiVeh(enabled){
+      if(!vehActions) return;
+      vehActions.style.display = enabled ? 'flex' : 'none';
+      vehContainer.querySelectorAll('.veh-card').forEach((card, idx)=>{ 
+        const ra = card.querySelector('.veh-actions');
+        if(ra) ra.style.display = enabled && idx>0 ? 'block' : 'none';
+      });
+    }
+    function addVehicle(){
+      const maxVeh = 4;
+      let count = currentVehCount();
+      if(count>=maxVeh){ alert("Maximum 4 véhicules."); return; }
+      const i=count;
+      const html = templ.replaceAll("{i}", i).replaceAll("{n}", i+1);
+      const wrapper = document.createElement('div'); wrapper.innerHTML = html.trim();
+      const card = wrapper.firstElementChild; vehContainer.appendChild(card);
+      attachRemoveHandler(card); refreshVehHeaders(); enableMultiVeh(true);
+    }
+    function attachRemoveHandler(card){
+      const btn = card.querySelector('.remove-veh');
+      if(btn){ btn.addEventListener('click', ()=>{ card.remove(); refreshVehHeaders(); enableMultiVeh(multiVeh.checked); }); }
+    }
+    attachRemoveHandler(vehContainer.querySelector('.veh-card'));
+    if(multiVeh){ 
+      multiVeh.addEventListener('change', e=> enableMultiVeh(e.target.checked));
+      const addVehBtn = document.getElementById('addVeh');
+      if(addVehBtn){ addVehBtn.addEventListener('click', addVehicle); }
+    }
+
+    // Couvertures & franchises
+    const covTR = document.getElementById('cov_tr');
+    const covColl = document.getElementById('cov_collision');
+    const covTRSC = document.getElementById('cov_trsc');
+    const covRespUni = document.getElementById('cov_resp_uni');
+    const otherCovers = [covColl, covTRSC].filter(Boolean);
+    const allCovers = [covColl, covTRSC, covTR].filter(Boolean);
+    const selFrColl = document.getElementById('franchise_collision');
+    const selFrTRSC = document.getElementById('franchise_trsc');
+
+    function applyCoverageExclusivity(){
+      if(covTR && covTR.checked){ otherCovers.forEach(cb=>{ cb.checked=false; cb.disabled=true; }); } else { otherCovers.forEach(cb=> cb.disabled=false); }
+      const anyOther = otherCovers.some(cb=> cb && cb.checked);
+      if(covTR) covTR.disabled = anyOther;
+      if(covRespUni && covRespUni.checked){ allCovers.forEach(cb=>{ cb.checked=false; cb.disabled=true; }); } else { allCovers.forEach(cb=> cb.disabled=false); }
+    }
+    function updateFranchiseEnablement(){
+      if(!selFrColl || !selFrTRSC) return;
+      if(covRespUni && covRespUni.checked){ selFrColl.disabled=true; selFrColl.value=""; selFrTRSC.disabled=true; selFrTRSC.value=""; return; }
+      if(covTR && covTR.checked){ selFrColl.disabled=false; selFrTRSC.disabled=false; }
+      else { selFrColl.disabled=!(covColl && covColl.checked); selFrTRSC.disabled=!(covTRSC && covTRSC.checked); if(selFrColl.disabled) selFrColl.value=""; if(selFrTRSC.disabled) selFrTRSC.value=""; }
+    }
+    function handleCoverageChange(){ applyCoverageExclusivity(); updateFranchiseEnablement(); }
+    [covTR, covColl, covTRSC, covRespUni].filter(Boolean).forEach(cb => cb.addEventListener('change', handleCoverageChange));
+    handleCoverageChange();
+
+    // Validation minimale
+    document.getElementById('soumission').addEventListener('submit', function(e){
+      if(!this.checkValidity()){ e.preventDefault(); alert("Merci de compléter les champs obligatoires et de cocher les 3 consentements."); return false; }
+    });
+  </script>
+</body>
+</html>
